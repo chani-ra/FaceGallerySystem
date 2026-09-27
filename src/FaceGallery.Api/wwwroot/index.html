@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FaceGallery | אלבום הרגעים</title>
+
+    <style>
+        :root {
+            --walnut: #352b25;
+            --walnut-light: #60493b;
+            --wood: #926d53;
+            --cream: #f7f1e5;
+            --ivory: #fffcf6;
+            --latte: #e6d8c5;
+            --blush: #e7c6c3;
+            --dusty: #bc908d;
+            --stone: #8d877d;
+            --line: #d8cabb;
+            --shadow: 0 14px 38px #241b1612;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--cream);
+            color: var(--walnut);
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .wrap {
+            width: min(1300px, calc(100% - 54px));
+            margin-inline: auto;
+        }
+
+        /* HEADER */
+
+        .site-head {
+            background: var(--ivory);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .head-inner {
+            min-height: 84px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+        }
+
+        .logo {
+            direction: ltr;
+            font: 600 27px Georgia, serif;
+            letter-spacing: -0.9px;
+        }
+
+            .logo em {
+                color: var(--dusty);
+                font-style: normal;
+            }
+
+        .head-note {
+            color: var(--stone);
+            font-size: 12px;
+        }
+
+        /* HERO */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            background: var(--ivory);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .hero-inner {
+            min-height: 420px;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            align-items: center;
+            gap: 45px;
+            padding: 65px 0 75px;
+        }
+
+        .hero-copy {
+            position: relative;
+            z-index: 1;
+        }
+
+        .eyebrow {
+            font: 700 11px Georgia, serif;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+        }
+
+        .hero .eyebrow {
+            color: var(--wood);
+        }
+
+        h1 {
+            margin: 26px 0 23px;
+            font-size: clamp(44px, 6.3vw, 88px);
+            line-height: 1.07;
+            letter-spacing: -0.065em;
+            font-weight: 800;
+        }
+
+            h1 span {
+                color: var(--wood);
+            }
+
+        .intro {
+            max-width: 520px;
+            margin: 0;
+            font-size: 17px;
+            line-height: 1.85;
+            color: #736960;
+        }
+
+        .hero-foot {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 30px;
+            color: var(--wood);
+        }
+
+            .hero-foot b {
+                direction: ltr;
+                font: italic 21px Georgia, serif;
+            }
+
+        .rule {
+            width: 65px;
+            height: 1px;
+            background: var(--wood);
+        }
+
+        /* DECORATION */
+
+        .art {
+            position: relative;
+            min-height: 350px;
+            display: grid;
+            place-items: center;
+        }
+
+        .disc {
+            position: absolute;
+            width: min(345px, 85%);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: #e3d8ca;
+            left: 16%;
+            top: 2%;
+        }
+
+        .photo-frame {
+            position: absolute;
+            width: 230px;
+            height: 290px;
+            border: 12px solid var(--ivory);
+            border-bottom-width: 36px;
+            transform: rotate(9deg);
+            background: repeating-linear-gradient( 90deg, #9a7056 0 17px, #ab8165 17px 19px, #997256 19px 40px );
+            box-shadow: 0 19px 55px #352b252b;
+        }
+
+            .photo-frame::after {
+                content: "MOMENTS";
+                position: absolute;
+                bottom: -29px;
+                left: 0;
+                width: 100%;
+                text-align: center;
+                letter-spacing: 0.3em;
+                font: 11px Georgia, serif;
+                color: #947567;
+            }
+
+        .flower {
+            position: absolute;
+            display: grid;
+            place-items: center;
+            width: 124px;
+            height: 124px;
+            background: var(--blush);
+            color: var(--walnut);
+            clip-path: polygon( 50% 0%, 65% 15%, 84% 8%, 86% 30%, 100% 50%, 86% 69%, 93% 88%, 69% 85%, 50% 100%, 31% 85%, 7% 92%, 14% 69%, 0% 50%, 14% 30%, 7% 8%, 35% 15% );
+        }
+
+            .flower i {
+                font: 700 19px Georgia, serif;
+                font-style: normal;
+                text-align: center;
+            }
+
+            .flower.one {
+                right: 0;
+                top: 28px;
+                transform: rotate(18deg);
+            }
+
+            .flower.two {
+                left: 0;
+                bottom: 5px;
+                width: 140px;
+                height: 140px;
+                background: #aeb3a1;
+                transform: rotate(-12deg);
+            }
+
+                .flower.two i {
+                    font-size: 16px;
+                }
+
+        /* WORKSPACE */
+
+        .workspace {
+            background: var(--walnut);
+            padding: 76px 0 95px;
+        }
+
+        .workspace-intro {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 15px;
+            color: var(--cream);
+            border-bottom: 1px solid #ffffff43;
+            padding-bottom: 30px;
+            margin-bottom: 32px;
+        }
+
+            .workspace-intro h2 {
+                margin: 10px 0 0;
+                font-size: clamp(36px, 5vw, 60px);
+                letter-spacing: -0.045em;
+            }
+
+            .workspace-intro .eyebrow {
+                color: var(--blush);
+            }
+
+            .workspace-intro p {
+                max-width: 300px;
+                margin: 0;
+                color: #d8c9ba;
+                line-height: 1.7;
+            }
+
+        .cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .panel {
+            min-width: 0;
+            padding: 30px;
+            background: var(--cream);
+            border: 1px solid #f6ebde;
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+        }
+
+            .panel.full {
+                grid-column: 1 / -1;
+            }
+
+        .panel-head {
+            display: flex;
+            gap: 13px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .num {
+            flex: 0 0 37px;
+            height: 37px;
+            display: grid;
+            place-items: center;
+            border: 1px solid #ad9781;
+            border-radius: 50%;
+            font: 14px Georgia, serif;
+            color: var(--wood);
+        }
+
+        h3 {
+            margin: 0;
+            font-size: 25px;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .panel p.sub {
+            margin: 0 0 27px;
+            color: #84796f;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        /* FORM */
+
+        label {
+            display: block;
+            margin: 18px 0 9px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            min-width: 0;
+            height: 48px;
+            padding: 0 14px;
+            background: var(--ivory);
+            border: 1px solid var(--line);
+            border-radius: 2px;
+            color: var(--walnut);
+            outline: none;
+        }
+
+            input[type="text"]:focus,
+            select:focus {
+                border-color: var(--wood);
+                box-shadow: 0 0 0 3px #926d5322;
+            }
+
+        input[type="file"] {
+            display: block;
+            max-width: 100%;
+            margin: 15px 0;
+            font-size: 12px;
+        }
+
+            input[type="file"]::file-selector-button {
+                margin-left: 12px;
+                padding: 9px 13px;
+                background: var(--ivory);
+                border: 1px solid var(--line);
+                cursor: pointer;
+            }
+
+        .row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+            .row .grow {
+                flex: 1;
+                min-width: 0;
+            }
+
+        button {
+            min-height: 47px;
+            padding: 12px 18px;
+            background: var(--wood);
+            color: white;
+            border: 1px solid var(--wood);
+            border-radius: 2px;
+            font-weight: 700;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+            button:hover:not(:disabled) {
+                transform: translateY(-2px);
+                background: var(--walnut-light);
+            }
+
+            button.secondary {
+                background: transparent;
+                color: var(--wood);
+            }
+
+                button.secondary:hover:not(:disabled) {
+                    background: #eadccd;
+                }
+
+            button:disabled {
+                opacity: 0.55;
+                cursor: wait;
+            }
+
+        .line {
+            height: 1px;
+            margin: 27px 0;
+            background: var(--line);
+        }
+
+        .upload {
+            padding: 24px;
+            background: #eee4d6;
+            border: 1px dashed #c6b59e;
+        }
+
+        /* REFERENCE IMAGE */
+
+        .preview {
+            position: relative;
+            min-height: 210px;
+            height: auto;
+            display: grid;
+            place-items: center;
+            background: #e8dacc;
+            border: 1px solid var(--line);
+        }
+
+            .preview::before {
+                content: "";
+                position: absolute;
+                inset: 20px;
+                border: 1px solid #ffffff9d;
+            }
+
+            .preview img {
+                position: relative;
+                display: none;
+                width: 100%;
+                height: auto;
+                max-height: 600px;
+                object-fit: contain;
+                object-position: center;
+            }
+
+            .preview span {
+                text-align: center;
+                font: italic 22px Georgia, serif;
+                color: #977964;
+            }
+
+        .check {
+            display: flex;
+            align-items: start;
+            gap: 10px;
+            margin-top: 12px;
+            padding: 15px;
+            background: #ede1d1;
+        }
+
+            .check input {
+                width: 18px;
+                height: 18px;
+                accent-color: var(--wood);
+            }
+
+            .check label {
+                margin: 0;
+                cursor: pointer;
+            }
+
+            .check small {
+                display: block;
+                margin-top: 5px;
+                color: #756657;
+                font-weight: 400;
+                line-height: 1.5;
+            }
+
+        .action {
+            width: 100%;
+            margin-top: 22px;
+            background: var(--walnut);
+            border-color: var(--walnut);
+        }
+
+        /* STATUS AND RESULTS */
+
+        .status {
+            min-height: 20px;
+            margin: 12px 0 0;
+            color: #735b49;
+            font-size: 13px;
+            line-height: 1.6;
+            white-space: pre-line;
+        }
+
+            .status.error {
+                color: #aa364e;
+            }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat( auto-fill, minmax(165px, 1fr) );
+            gap: 18px;
+            margin-top: 22px;
+        }
+
+        .item {
+            min-width: 0;
+            overflow: hidden;
+            background: var(--ivory);
+            border: 1px solid var(--line);
+        }
+
+            .item.match {
+                outline: 3px solid var(--dusty);
+            }
+
+            .item img {
+                display: block;
+                width: 100%;
+                height: 168px;
+                object-fit: contain;
+                background: #e5d4c5;
+            }
+
+            .item .meta {
+                padding: 12px;
+                font-size: 12px;
+                overflow-wrap: anywhere;
+            }
+
+        .score {
+            display: inline-block;
+            margin-top: 7px;
+            padding: 4px 8px;
+            background: var(--blush);
+            color: var(--walnut);
+        }
+
+        .missing-photo {
+            padding: 25px 15px;
+            min-height: 168px;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            background: #eaded3;
+            color: #8a514c;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+            .missing-photo[hidden] {
+                display: none;
+            }
+
+        .empty {
+            grid-column: 1 / -1;
+            padding: 37px 14px;
+            text-align: center;
+            color: #87786d;
+            border: 1px dashed var(--line);
+        }
+
+        .bottom {
+            padding: 35px 0;
+            text-align: center;
+            direction: ltr;
+            color: #b59d88;
+            font: italic 17px Georgia, serif;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 890px) {
+            .hero-inner,
+            .cols {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-inner {
+                padding-block: 45px;
+            }
+
+            .art {
+                display: none;
+            }
+
+            .panel.full {
+                grid-column: auto;
+            }
+
+            .workspace-intro {
+                display: block;
+            }
+
+                .workspace-intro p {
+                    margin-top: 12px;
+                }
+        }
+
+        @media (max-width: 600px) {
+            .wrap {
+                width: calc(100% - 28px);
+            }
+
+            .head-inner {
+                min-height: 68px;
+            }
+
+            .head-note {
+                display: none;
+            }
+
+            .panel {
+                padding: 20px;
+            }
+
+            .row {
+                flex-wrap: wrap;
+            }
+
+            h1 {
+                font-size: 45px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header class="site-head">
+        <div class="wrap head-inner">
+
+            <div class="logo">
+                Face<em>Gallery</em>.
+            </div>
+
+            <div class="head-note" id="serverStatus">
+                אלבום התמונות שלך
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+        <div class="wrap hero-inner">
+
+            <div class="hero-copy">
+
+                <div class="eyebrow" dir="ltr">
+                    THE MEMORY COLLECTION · EST. 2026
+                </div>
+
+                <h1>
+                    הרגעים שלך,<br>
+                    <span>שוב מול העיניים.</span>
+                </h1>
+
+                <p class="intro">
+                    תמונות ישנות, רגעים שאוהבים לשמור
+                    וזיכרונות שמחכים להימצא.
+                    בחרי גלריה ותמונה —
+                    ותני לחיפוש להחזיר את הרגעים שלך.
+                </p>
+
+                <div class="hero-foot">
+                    <div class="rule"></div>
+
+                    <b>
+                        Collect. Find. Remember.
+                    </b>
+                </div>
+
+            </div>
+
+            <div class="art" aria-hidden="true">
+
+                <div class="disc"></div>
+
+                <div class="photo-frame"></div>
+
+                <div class="flower one">
+                    <i>your<br>story</i>
+                </div>
+
+                <div class="flower two">
+                    <i>little<br>moments</i>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- WORKSPACE -->
+
+    <main class="workspace">
+        <div class="wrap">
+
+            <div class="workspace-intro">
+
+                <div>
+                    <div class="eyebrow" dir="ltr">
+                        01 — YOUR COLLECTION
+                    </div>
+
+                    <h2>האלבום הפרטי שלך</h2>
+                </div>
+
+                <p>
+                    בחרי גלריה, שמרי תמונות,
+                    וחפשי בדיוק את הרגעים שחיפשת.
+                </p>
+
+            </div>
+
+
+            <div class="cols">
+
+                <!-- GALLERIES -->
+
+                <section class="panel">
+
+                    <div class="panel-head">
+                        <div class="num">01</div>
+
+                        <h3>הגלריות שלי</h3>
+                    </div>
+
+                    <p class="sub">
+                        כל הסיפורים שלך,
+                        מסודרים באלבומים נפרדים.
+                    </p>
+
+                    <label for="gallerySelect">
+                        גלריה נבחרת
+                    </label>
+
+                    <div class="row">
+
+                        <select id="gallerySelect" class="grow">
+                            <option value="">
+                                טוענת גלריות...
+                            </option>
+                        </select>
+
+                        <button class="secondary"
+                                id="refreshGalleries"
+                                type="button">
+                            רענון
+                        </button>
+
+                    </div>
+
+                    <div class="line"></div>
+
+                    <label for="newGalleryName">
+                        גלריה חדשה
+                    </label>
+
+                    <div class="row">
+
+                        <input id="newGalleryName"
+                               class="grow"
+                               type="text"
+                               maxlength="100"
+                               placeholder="שם הגלריה שלך">
+
+                        <button id="createGallery"
+                                type="button">
+                            יצירה
+                        </button>
+
+                    </div>
+
+                    <p id="galleryStatus"
+                       class="status"
+                       aria-live="polite">
+                    </p>
+
+                    <div class="line"></div>
+
+                    <div class="upload">
+
+                        <h3 style="font-size:19px">
+                            הוסיפי תמונות לאלבום
+                        </h3>
+
+                        <p class="sub" style="margin:8px 0 0">
+                            אפשר לבחור מספר תמונות יחד.
+                        </p>
+
+                        <input id="galleryFiles"
+                               type="file"
+                               accept="image/*"
+                               multiple>
+
+                        <button id="uploadImages"
+                                class="secondary"
+                                type="button">
+                            העלאת התמונות
+                        </button>
+
+                        <p id="uploadStatus"
+                           class="status"
+                           aria-live="polite">
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                <!-- SEARCH -->
+
+                <section class="panel">
+
+                    <div class="panel-head">
+                        <div class="num">02</div>
+
+                        <h3>חיפוש בתמונות</h3>
+                    </div>
+
+                    <p class="sub">
+                        תמונה אחת יכולה לעזור
+                        למצוא רגעים רבים.
+                    </p>
+
+                    <div class="preview">
+
+                        <span id="refPlaceholder">
+                            A picture to remember
+                        </span>
+
+                        <img id="refPreview"
+                             alt="תמונת ייחוס">
+
+                    </div>
+
+                    <label for="refFile">
+                        בחרי תמונת ייחוס
+                    </label>
+
+                    <input id="refFile"
+                           type="file"
+                           accept="image/*">
+
+                    <div class="check">
+
+                        <input id="searchAllUser"
+                               type="checkbox">
+
+                        <label for="searchAllUser">
+
+                            <b>
+                                חיפוש בכל הגלריות שלי
+                            </b>
+
+                            <small>
+                                במקום לחפש בגלריה אחת בלבד
+                            </small>
+
+                        </label>
+
+                    </div>
+
+                    <label for="threshold">
+                        סף התאמה (אופציונלי)
+                    </label>
+
+                    <input id="threshold"
+                           type="text"
+                           inputmode="decimal"
+                           placeholder="אוטומטי">
+
+                    <p class="sub" style="margin:7px 0 0">
+                        השאירי ריק לשימוש בהגדרות
+                        החיפוש של השרת.
+                    </p>
+
+                    <button id="recognizeBtn"
+                            class="action"
+                            type="button">
+                        מצאי את התמונות שלי ←
+                    </button>
+
+                    <p id="recognizeStatus"
+                       class="status"
+                       aria-live="polite">
+                    </p>
+
+                </section>
+
+
+                <!-- GALLERY IMAGES -->
+
+                <section class="panel full">
+
+                    <div class="panel-head">
+                        <div class="num">03</div>
+
+                        <h3>התמונות באלבום</h3>
+                    </div>
+
+                    <p class="sub">
+                        גלריה נבחרת
+                    </p>
+
+                    <div id="galleryGrid" class="grid">
+                        <div class="empty">
+                            טוענת תמונות...
+                        </div>
+                    </div>
+
+                </section>
+
+
+                <!-- SEARCH RESULTS -->
+
+                <section class="panel full">
+
+                    <div class="panel-head">
+                        <div class="num">04</div>
+
+                        <h3>התמונות שמצאנו</h3>
+                    </div>
+
+                    <div class="row"
+                         style="justify-content:space-between">
+
+                        <p class="sub" style="margin:0">
+                            תוצאות החיפוש יופיעו כאן.
+                        </p>
+
+                        <button id="clearResults"
+                                class="secondary"
+                                type="button">
+                            ניקוי תוצאות
+                        </button>
+
+                    </div>
+
+                    <div id="resultsGrid" class="grid">
+                        <div class="empty">
+                            עדיין לא בוצע חיפוש.
+                        </div>
+                    </div>
+
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="bottom">
+        FaceGallery · A collection of little moments
+    </footer>
+
+
+    <script>
+        "use strict";
+
+        // המשתמש המקומי הקיים בפרויקט
+        const LOCAL_USER_ID = 1;
+
+        // לא משתמשים בשם $ כדי למנוע התנגשות עם BrowserLink
+        const byId = id => document.getElementById(id);
+
+        let selectedGalleryId =
+            localStorage.getItem(
+                "faceGallerySelectedGalleryId"
+            ) || "";
+
+        let galleryRequestId = 0;
+        let searchRequestId = 0;
+        let referenceUrl = null;
+
+
+        // =================================
+        // HELPERS
+        // =================================
+
+        function status(id, message, error = false) {
+            const element = byId(id);
+
+            element.textContent = message;
+            element.classList.toggle("error", error);
+        }
+
+
+        function make(tag, text, className = "") {
+            const node = document.createElement(tag);
+
+            node.textContent = String(text ?? "");
+
+            if (className) {
+                node.className = className;
+            }
+
+            return node;
+        }
+
+
+        function empty(container, text) {
+            container.replaceChildren(
+                make("div", text, "empty")
+            );
+        }
+
+
+        function selected() {
+            return byId("gallerySelect").value;
+        }
+
+
+        function remember(id) {
+            selectedGalleryId = String(id || "");
+
+            if (selectedGalleryId) {
+                localStorage.setItem(
+                    "faceGallerySelectedGalleryId",
+                    selectedGalleryId
+                );
+            } else {
+                localStorage.removeItem(
+                    "faceGallerySelectedGalleryId"
+                );
+            }
+        }
+
+
+        async function responseError(response) {
+            const text = await response.text();
+
+            try {
+                const data = JSON.parse(text);
+
+                return data.message
+                    || data.title
+                    || data.error
+                    || text.slice(0, 300);
+            } catch {
+                return text.slice(0, 300)
+                    || `HTTP ${response.status}`;
+            }
+        }
+
+
+        // =================================
+        // IMAGE CARD
+        // =================================
+
+        function card(
+            url,
+            label,
+            score = null,
+            match = false,
+            note = ""
+        ) {
+            const item = make(
+                "article",
+                "",
+                "item" + (match ? " match" : "")
+            );
+
+            const image = document.createElement("img");
+
+            image.alt = label;
+            image.loading = "lazy";
+
+            const missing = make(
+                "div",
+                "קובץ התמונה חסר בשרת. ניתן לנסות לשחזר אותו מהפרויקט הישן.",
+                "missing-photo"
+            );
+
+            missing.hidden = true;
+
+            image.addEventListener("error", () => {
+                image.style.display = "none";
+                missing.hidden = false;
+            });
+
+            item.append(image, missing);
+
+            // הגדרת המקור רק אחרי רישום מאזין השגיאה
+            image.src = url;
+
+            const meta = make(
+                "div",
+                label,
+                "meta"
+            );
+
+            if (score !== undefined && score !== null) {
+                meta.append(
+                    make(
+                        "div",
+                        `${Number(score).toFixed(1)}% — ציון התאמה`,
+                        "score"
+                    )
+                );
+            }
+
+            if (note) {
+                meta.append(
+                    make("p", note)
+                );
+            }
+
+            item.append(meta);
+
+            return item;
+        }
+
+
+        // =================================
+        // CLEAR RESULTS
+        // =================================
+
+        function clearResults() {
+            searchRequestId++;
+
+            empty(
+                byId("resultsGrid"),
+                "עדיין לא בוצע חיפוש."
+            );
+
+            status("recognizeStatus", "");
+        }
+
+
+        // =================================
+        // LOAD GALLERIES
+        // =================================
+
+        async function loadGalleries(
+            preferred = selectedGalleryId
+        ) {
+            status(
+                "galleryStatus",
+                "טוענת גלריות..."
+            );
+
+            try {
+                const response = await fetch(
+                    "/api/galleries",
+                    { cache: "no-store" }
+                );
+
+                if (!response.ok) {
+                    throw new Error(
+                        await responseError(response)
+                    );
+                }
+
+                const galleries = await response.json();
+
+                if (!Array.isArray(galleries)) {
+                    throw new Error(
+                        "תשובה לא תקינה מהשרת."
+                    );
+                }
+
+                const dropdown = byId("gallerySelect");
+
+                dropdown.replaceChildren();
+
+                for (const gallery of galleries) {
+                    dropdown.add(
+                        new Option(
+                            `${gallery.name} (${gallery.imageCount ?? 0} תמונות)`,
+                            String(gallery.id)
+                        )
+                    );
+                }
+
+                if (!galleries.length) {
+                    dropdown.add(
+                        new Option("אין גלריות", "")
+                    );
+
+                    remember("");
+
+                    empty(
+                        byId("galleryGrid"),
+                        "צרי את הגלריה הראשונה שלך."
+                    );
+
+                    status(
+                        "galleryStatus",
+                        "אין עדיין גלריות."
+                    );
+
+                    byId("serverStatus").textContent =
+                        "מחובר לשרת";
+
+                    return;
+                }
+
+                const gallery =
+                    galleries.find(
+                        g => String(g.id) === String(preferred)
+                    ) || galleries[0];
+
+                dropdown.value = String(gallery.id);
+
+                remember(dropdown.value);
+
+                status("galleryStatus", "");
+
+                byId("serverStatus").textContent =
+                    "מחובר לשרת";
+
+                await loadGalleryImages();
+
+            } catch (error) {
+                status(
+                    "galleryStatus",
+                    error.message,
+                    true
+                );
+
+                byId("serverStatus").textContent =
+                    "שגיאה בחיבור לשרת";
+            }
+        }
+
+
+        // =================================
+        // LOAD GALLERY IMAGES
+        // =================================
+
+        async function loadGalleryImages() {
+            const id = selected();
+            const request = ++galleryRequestId;
+
+            if (!id) {
+                empty(
+                    byId("galleryGrid"),
+                    "בחרי גלריה."
+                );
+                return;
+            }
+
+            empty(
+                byId("galleryGrid"),
+                "טוענת תמונות..."
+            );
+
+            try {
+                const response = await fetch(
+                    `/api/galleries/${encodeURIComponent(id)}/images`,
+                    { cache: "no-store" }
+                );
+
+                if (!response.ok) {
+                    throw new Error(
+                        await responseError(response)
+                    );
+                }
+
+                const images = await response.json();
+
+                // התעלמות מתגובה ישנה לאחר החלפת גלריה
+                if (
+                    request !== galleryRequestId ||
+                    id !== selected()
+                ) {
+                    return;
+                }
+
+                if (!Array.isArray(images) || !images.length) {
+                    empty(
+                        byId("galleryGrid"),
+                        "אין עדיין תמונות בגלריה זו."
+                    );
+                    return;
+                }
+
+                byId("galleryGrid").replaceChildren(
+                    ...images.map(image =>
+                        card(
+                            image.url,
+                            `תמונה #${image.id}`
+                        )
+                    )
+                );
+
+            } catch (error) {
+                if (request === galleryRequestId) {
+                    empty(
+                        byId("galleryGrid"),
+                        error.message
+                    );
+                }
+            }
+        }
+
+
+        // =================================
+        // GALLERY EVENTS
+        // =================================
+
+        byId("gallerySelect").addEventListener(
+            "change",
+            () => {
+                remember(selected());
+                clearResults();
+                loadGalleryImages();
+            }
+        );
+
+
+        byId("refreshGalleries").addEventListener(
+            "click",
+            () => loadGalleries(selected())
+        );
+
+
+        byId("clearResults").addEventListener(
+            "click",
+            clearResults
+        );
+
+
+        // =================================
+        // CREATE GALLERY
+        // =================================
+
+        byId("createGallery").addEventListener(
+            "click",
+            async event => {
+                const name = byId("newGalleryName")
+                    .value
+                    .trim();
+
+                if (!name) {
+                    status(
+                        "galleryStatus",
+                        "כתבי שם לגלריה.",
+                        true
+                    );
+                    return;
+                }
+
+                const button = event.currentTarget;
+                button.disabled = true;
+
+                try {
+                    const response = await fetch(
+                        "/api/galleries",
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({ name })
+                        }
+                    );
+
+                    if (!response.ok) {
+                        throw new Error(
+                            await responseError(response)
+                        );
+                    }
+
+                    const gallery = await response.json();
+
+                    byId("newGalleryName").value = "";
+
+                    clearResults();
+
+                    await loadGalleries(
+                        String(gallery.id)
+                    );
+
+                    status(
+                        "galleryStatus",
+                        "הגלריה נוצרה בהצלחה."
+                    );
+
+                } catch (error) {
+                    status(
+                        "galleryStatus",
+                        error.message,
+                        true
+                    );
+
+                } finally {
+                    button.disabled = false;
+                }
+            }
+        );
+
+
+        // =================================
+        // UPLOAD IMAGES
+        // =================================
+
+        byId("uploadImages").addEventListener(
+            "click",
+            async event => {
+                const id = selected();
+
+                const files = [
+                    ...byId("galleryFiles").files
+                ];
+
+                if (!id) {
+                    status(
+                        "uploadStatus",
+                        "בחרי גלריה תחילה.",
+                        true
+                    );
+                    return;
+                }
+
+                if (!files.length) {
+                    status(
+                        "uploadStatus",
+                        "בחרי תמונות להעלאה.",
+                        true
+                    );
+                    return;
+                }
+
+                const button = event.currentTarget;
+                button.disabled = true;
+
+                try {
+                    let count = 0;
+
+                    for (const file of files) {
+                        count++;
+
+                        status(
+                            "uploadStatus",
+                            `מעלה ${count} מתוך ${files.length}...`
+                        );
+
+                        const form = new FormData();
+
+                        form.append("file", file);
+
+                        const response = await fetch(
+                            `/api/galleries/${encodeURIComponent(id)}/images`,
+                            {
+                                method: "POST",
+                                body: form
+                            }
+                        );
+
+                        if (!response.ok) {
+                            throw new Error(
+                                `${file.name}: ${await responseError(response)}`
+                            );
+                        }
+                    }
+
+                    byId("galleryFiles").value = "";
+
+                    clearResults();
+
+                    await loadGalleries(id);
+
+                    status(
+                        "uploadStatus",
+                        `${files.length} תמונות הועלו בהצלחה.`
+                    );
+
+                } catch (error) {
+                    status(
+                        "uploadStatus",
+                        error.message,
+                        true
+                    );
+
+                } finally {
+                    button.disabled = false;
+                }
+            }
+        );
+
+
+        // =================================
+        // REFERENCE IMAGE PREVIEW
+        // =================================
+
+        byId("refFile").addEventListener(
+            "change",
+            () => {
+                if (referenceUrl) {
+                    URL.revokeObjectURL(referenceUrl);
+                }
+
+                const file = byId("refFile").files[0];
+
+                referenceUrl = file
+                    ? URL.createObjectURL(file)
+                    : null;
+
+                byId("refPreview").style.display =
+                    file ? "block" : "none";
+
+                byId("refPlaceholder").style.display =
+                    file ? "none" : "block";
+
+                byId("refPreview").src =
+                    referenceUrl || "";
+
+                clearResults();
+            }
+        );
+
+
+        // =================================
+        // IMAGE RECOGNITION
+        // =================================
+
+        byId("recognizeBtn").addEventListener(
+            "click",
+            async event => {
+                const file = byId("refFile").files[0];
+
+                const searchAll =
+                    byId("searchAllUser").checked;
+
+                const id = selected();
+
+                const raw = byId("threshold")
+                    .value
+                    .trim();
+
+                if (!file) {
+                    status(
+                        "recognizeStatus",
+                        "בחרי תמונת ייחוס.",
+                        true
+                    );
+                    return;
+                }
+
+                if (!searchAll && !id) {
+                    status(
+                        "recognizeStatus",
+                        "בחרי גלריה או סמני חיפוש בכל הגלריות.",
+                        true
+                    );
+                    return;
+                }
+
+                if (
+                    raw &&
+                    (
+                        !Number.isFinite(Number(raw)) ||
+                        Number(raw) < 0 ||
+                        Number(raw) > 1
+                    )
+                ) {
+                    status(
+                        "recognizeStatus",
+                        "סף התאמה חייב להיות בין 0 ל־1.",
+                        true
+                    );
+                    return;
+                }
+
+                const query = raw
+                    ? `&threshold=${encodeURIComponent(raw)}`
+                    : "";
+
+                const url = searchAll
+                    ? `/api/recognize/by-user?userId=${LOCAL_USER_ID}${query}`
+                    : `/api/recognize?galleryId=${encodeURIComponent(id)}${query}`;
+
+                const button = event.currentTarget;
+
+                const request = ++searchRequestId;
+
+                button.disabled = true;
+
+                empty(
+                    byId("resultsGrid"),
+                    "מחפשת תמונות..."
+                );
+
+                status(
+                    "recognizeStatus",
+                    "החיפוש מתבצע."
+                );
+
+                try {
+                    const form = new FormData();
+
+                    form.append("file", file);
+
+                    const response = await fetch(
+                        url,
+                        {
+                            method: "POST",
+                            body: form
+                        }
+                    );
+
+                    if (!response.ok) {
+                        const details =
+                            await responseError(response);
+
+                        if (
+                            /yolov8n\.onnx|YOLO model is missing/i
+                                .test(details)
+                        ) {
+                            throw new Error(
+                                "מודל החיפוש yolov8n.onnx עדיין חסר. " +
+                                "ניתן בינתיים לנהל גלריות ולהעלות תמונות. " +
+                                "חיפוש ה־AI יפעל לאחר התקנת המודל."
+                            );
+                        }
+
+                        throw new Error(details);
+                    }
+
+                    const results = await response.json();
+
+                    // אם התחיל חיפוש חדש, מתעלמים מהישן
+                    if (request !== searchRequestId) {
+                        return;
+                    }
+
+                    if (!Array.isArray(results)) {
+                        throw new Error(
+                            "תשובה לא צפויה מהשרת."
+                        );
+                    }
+
+                    // רק תמונות שהשרת סימן כהתאמה
+                    const matches = results.filter(
+                        result => result.isMatch === true
+                    );
+
+                    status(
+                        "recognizeStatus",
+                        `נבדקו ${results.length} תמונות; נמצאו ${matches.length} התאמות.`
+                    );
+
+                    if (!matches.length) {
+                        empty(
+                            byId("resultsGrid"),
+                            "לא נמצאו התאמות."
+                        );
+                        return;
+                    }
+
+                    // תיקון חשוב:
+                    // מציגים רק matches, ולא results
+                    byId("resultsGrid").replaceChildren(
+                        ...matches.map(result =>
+                            card(
+                                result.url,
+                                `תמונה #${result.imageId}`,
+                                result.scorePercent,
+                                true,
+                                result.note
+                            )
+                        )
+                    );
+
+                } catch (error) {
+                    if (request === searchRequestId) {
+                        status(
+                            "recognizeStatus",
+                            `שגיאה בחיפוש: ${error.message}`,
+                            true
+                        );
+
+                        empty(
+                            byId("resultsGrid"),
+                            "החיפוש לא הושלם."
+                        );
+                    }
+
+                } finally {
+                    button.disabled = false;
+                }
+            }
+        );
+
+
+        // =================================
+        // INITIALIZATION
+        // =================================
+
+        clearResults();
+        loadGalleries();
+
+    </script>
+
+</body>
+</html>F
